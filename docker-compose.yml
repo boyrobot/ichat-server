@@ -2,29 +2,38 @@ version: '3.4'
 
 services:
   fastdfs:
-    image: season/fastdfs:1.2
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - 3000:3000
+    image: ygqygq2/fastdfs-nginx:V6.9.4
+    restart: always
+    mem_limit: 512m
+    volumes:
+      - /workspaces/ichat-server/script/deploy/fastdfs/storage:/data/fastdfs/storage
+      - /workspaces/ichat-server/script/deploy/fastdfs/tracker:/data/fastdfs/tracker
+      - /workspaces/ichat-server/script/deploy/fastdfs/conf/storage.conf:/etc/fdfs/storage.conf
+      - /workspaces/ichat-server/script/deploy/fastdfs/conf/tracker.conf:/etc/fdfs/tracker.conf
+      - /workspaces/ichat-server/script/deploy/fastdfs/conf/client.conf:/etc/fdfs/client.conf
+      - /workspaces/ichat-server/script/deploy/fastdfs/conf/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
+    # networks:
+    #   - host
+    privileged: true
+
   mysql:
     image: mysql:5.7.4
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=ichat
-      - MYSQL_USER=ichat
+      - MYSQL_DATABASE=fastdfs
+      - MYSQL_USER=fastdfs
+      - MYSQL_PASSWORD=123456
     ports:
       - 3306:3306
     volumes:
       - ./mysql:/var/lib/mysql
-  ichat:
-    image: xx
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    depends_on:
-      - fastdfs
-      - mysql
-    ports:
-      - 3000:3000
+
+  # ichat:
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile
+  #   depends_on:
+  #     - fastdfs
+  #     - mysql
+  #   ports:
+  #     - 3000:3000

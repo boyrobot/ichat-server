@@ -4,4 +4,10 @@ mvn install
 mvn package
 
 cp target/ichat.jar script/
-cp resources/application.yml script/
+cp Dockerfile script/
+cp src/main/resources/application.yml script/
+
+install_online.sh
+delete.sh
+restart.sh
+
