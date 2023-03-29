@@ -5,8 +5,6 @@ mvn package
 
 cp target/ichat.jar script/
 cp src/main/resources/application.yml script/
-cp Dockerfile script/
-cp docker-compose.yml script/
 
 cd script
 docker-compose up
