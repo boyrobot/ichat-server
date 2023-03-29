@@ -1,0 +1,32 @@
+# Server服务端相关配置
+server:
+  port: 8080    # 配置api端口号
+  tomcat:
+    uri-encoding: UTF-8  # tomcat的URI编码
+
+spring:
+  profiles:
+    # active: dev
+   active: prod
+
+# mybatis配置
+mybatis:
+  type-aliases-package: com.ichat.*.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 通用Mapper配置
+mapper:
+  mappers: com.ichat.common.utils.MyMapper
+  not-empty: false
+  identity: MYSQL
+
+# 分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  support-methods-arguments: true
+  params: count:countSql
+
+
+
