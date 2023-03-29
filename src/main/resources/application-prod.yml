@@ -1,6 +1,6 @@
 host:
   public: 0.0.0.0
-  # private: 192.168.241.130
+  private: fastdfs
   local: mysql
 
 # 配置相关数据源 使用 HikariCP 数据源
