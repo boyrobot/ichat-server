@@ -28,12 +28,12 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
 
-  # ichat:
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile
-  #   depends_on:
-  #     - fastdfs
-  #     - mysql
-  #   ports:
-  #     - 3000:3000
+  ichat:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - fastdfs
+      - mysql
+    ports:
+      - 3000:3000

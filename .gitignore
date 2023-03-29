@@ -39,7 +39,5 @@ build/
 script/ichat.jar
 script/Dockerfile
 .gitignore
-mysql/auto.cnf
-mysql/ib_logfile0
-mysql/ib_logfile1
-mysql/ibdata1
+mysql/
+script/mysql/
