@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  fastdfs:
+    image: season/fastdfs:1.2
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+  mysql:
+    image: mysql:5.7.1
+  ichat:
+    image: xx
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    

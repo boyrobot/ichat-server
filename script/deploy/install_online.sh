@@ -2,30 +2,6 @@
 # 部署安装脚本
 
 echo "*************************部署开始*************************"
-# 安装前环境配置
-echo "=============正在关闭selinux...========================="
-setenforce 0
-sed -i -e "s|^[^#]SELINUX=.*|SELINUX=disabled|" /etc/selinux/config
-
-echo "=============防火墙开机自启...========================="
-systemctl enable firewalld
-echo "=============开放ssh的防火墙端口22...========================="
-firewall-cmd --zone=public --add-port=22/tcp --permanent
-echo "=============开放mysql的防火墙端口3306...========================="
-firewall-cmd --zone=public --add-port=3306/tcp --permanent
-echo "=============开放ichat的防火墙端口8080...========================="
-firewall-cmd --zone=public --add-port=8080/tcp --permanent
-echo "=============开放fastdfs的防火墙端口80...========================="
-firewall-cmd --zone=public --add-port=80/tcp --permanent
-echo "=============开放fastdfs的防火墙端口22122...========================="
-firewall-cmd --zone=public --add-port=22122/tcp --permanent
-echo "=============重启防火墙...========================="
-service firewalld restart
-
-#启动docker服务
-echo "=============启动docker服务...========================="
-systemctl start docker
-sudo systemctl enable docker
 
 #移动文件到指定位置
 echo "=============将fastdfs文件移动到指定位置...========================="
@@ -39,8 +15,8 @@ cp *.yml /usr/local/apps/ichat/conf/
 
 #拉取镜像文件
 echo "===============拉取fastdfs镜像文件...==============="
-docker pull season/fastdfs
-docker tag season/fastdfs:5.11 fastdfs-nginx:v5.11
+docker pull season/fastdfs:1.2
+docker tag season/fastdfs:1.2 fastdfs-nginx:v5.11
 echo "===============加载ichat镜像文件...==============="
 docker build -t ichat:1.0.0 .
 echo "===============加载mysql镜像文件...==============="
