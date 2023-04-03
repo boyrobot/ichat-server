@@ -34,7 +34,7 @@ fdfs:
   - ${host.private}:22122
 
 logging:
-  path: /usr/local/apps/ichat/log
+  path: log
   file: ${logging.path}/ichat
   config: classpath:logback-spring.xml
   level:
