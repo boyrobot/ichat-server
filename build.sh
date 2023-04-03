@@ -10,12 +10,11 @@ cd script
 docker-compose up
 
 
-docker build
 docker build  -f Dockerfile -t jianboy/ichat:latest . 
 
 docker login --username=jianboy -p xx
 docker push jianboy/ichat:latest
-docker pull 
+docker pull jianboy/ichat:latest
 
 
 install_online.sh
