@@ -6,8 +6,7 @@ server:
 
 spring:
   profiles:
-    # active: dev
-   active: prod
+    active: prod
 
 # mybatis配置
 mybatis:
