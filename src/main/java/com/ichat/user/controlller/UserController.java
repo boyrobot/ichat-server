@@ -82,10 +82,6 @@ public class UserController {
         // 上传文件到fastdfs
         MultipartFile headFile = FileUtils.fileToMultipart(userHeadPath);
         String url = fastDFSClient.uploadBase64(headFile);
-//        log.info(url);
-
-        // "fasfaffasfaffsf.png"
-        // "fasfaffasfaffsf_80x80.png"
 
         // 获取缩略图的url
         String thump = "_80x80.";
