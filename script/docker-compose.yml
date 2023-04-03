@@ -7,14 +7,14 @@ services:
     restart: always
     mem_limit: 512m
     volumes:
-      - /workspaces/ichat-server/script/deploy/fastdfs/storage:/data/fastdfs/storage
-      - /workspaces/ichat-server/script/deploy/fastdfs/tracker:/data/fastdfs/tracker
-      - /workspaces/ichat-server/script/deploy/fastdfs/conf/storage.conf:/etc/fdfs/storage.conf
-      - /workspaces/ichat-server/script/deploy/fastdfs/conf/tracker.conf:/etc/fdfs/tracker.conf
-      - /workspaces/ichat-server/script/deploy/fastdfs/conf/client.conf:/etc/fdfs/client.conf
-      - /workspaces/ichat-server/script/deploy/fastdfs/conf/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
-    # networks:
-    #   - host
+      - deploy/fastdfs/storage:/data/fastdfs/storage
+      - deploy/fastdfs/tracker:/data/fastdfs/tracker
+      - deploy/fastdfs/conf/storage.conf:/etc/fdfs/storage.conf
+      - deploy/fastdfs/conf/tracker.conf:/etc/fdfs/tracker.conf
+      - deploy/fastdfs/conf/client.conf:/etc/fdfs/client.conf
+      - deploy/fastdfs/conf/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
+    networks:
+      - host
     privileged: true
     ports:
       - 22122:22122
@@ -32,12 +32,16 @@ services:
       - ./mysql:/var/lib/mysql
 
   ichat:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: jianboy/ichat:latest
     depends_on:
       - fastdfs
       - mysql
+    restart: always
     ports:
       - 8080:8080
       - 8088:8088
+
+  ichat-f:
+    image: jianboy/ichat-f:latest
+    ports:
+      - 80:80
