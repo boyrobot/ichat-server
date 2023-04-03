@@ -9,6 +9,15 @@ cp src/main/resources/application.yml script/
 cd script
 docker-compose up
 
+
+docker build
+docker build  -f Dockerfile -t jianboy/ichat:latest . 
+
+docker login --username=jianboy -p xx
+docker push jianboy/ichat:latest
+docker pull 
+
+
 install_online.sh
 delete.sh
 restart.sh
