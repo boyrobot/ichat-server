@@ -44,7 +44,7 @@ services:
   ichat-f:
     image: jianboy/ichat-f:latest
     build:
-      context: ./froent
+      context: ./frontend
       dockerfile: ./Dockerfile
     ports:
       - 80:80

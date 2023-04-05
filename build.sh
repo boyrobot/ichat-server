@@ -16,7 +16,7 @@ docker login --username=jianboy -p xx
 docker push jianboy/ichat:latest
 docker pull jianboy/ichat:latest
 
-cd script/froent
+cd script/frontend
 git clone https://github.com/boyrobot/ichat-weixin
 
 docker build  -f Dockerfile -t jianboy/ichat-f:latest . 
