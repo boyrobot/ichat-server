@@ -7,12 +7,12 @@ services:
     restart: always
     mem_limit: 512m
     volumes:
-      - deploy/fastdfs/storage:/data/fastdfs/storage
-      - deploy/fastdfs/tracker:/data/fastdfs/tracker
-      - deploy/fastdfs/conf/storage.conf:/etc/fdfs/storage.conf
-      - deploy/fastdfs/conf/tracker.conf:/etc/fdfs/tracker.conf
-      - deploy/fastdfs/conf/client.conf:/etc/fdfs/client.conf
-      - deploy/fastdfs/conf/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
+      - ./deploy/fastdfs/storage:/data/fastdfs/storage
+      - ./deploy/fastdfs/tracker:/data/fastdfs/tracker
+      - ./deploy/fastdfs/conf/storage.conf:/etc/fdfs/storage.conf
+      - ./deploy/fastdfs/conf/tracker.conf:/etc/fdfs/tracker.conf
+      - ./deploy/fastdfs/conf/client.conf:/etc/fdfs/client.conf
+      - ./deploy/fastdfs/conf/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
     networks:
       - host
     privileged: true

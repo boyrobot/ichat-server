@@ -1,13 +1,50 @@
 version: '3.4'
 
 services:
-  chatgptwordpress:
-    image: chatgptwordpress
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    environment:
-      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005,quiet=y
+  fastdfs:
+    image: ygqygq2/fastdfs-nginx:V6.9.4
+    # image: season/fastdfs:1.2
+    restart: always
+    mem_limit: 512m
+    volumes:
+      - ./deploy/fastdfs/storage:/data/fastdfs/storage
+      - ./deploy/fastdfs/tracker:/data/fastdfs/tracker
+      - ./deploy/fastdfs/conf/storage.conf:/etc/fdfs/storage.conf
+      - ./deploy/fastdfs/conf/tracker.conf:/etc/fdfs/tracker.conf
+      - ./deploy/fastdfs/conf/client.conf:/etc/fdfs/client.conf
+      - ./deploy/fastdfs/conf/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
+    networks:
+      - host
+    privileged: true
     ports:
-      - 3000:3000
-      - 5005:5005
+      - 22122:22122
+
+  mysql:
+    image: mysql:5.7.4
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=fastdfs
+      - MYSQL_USER=fastdfs
+      - MYSQL_PASSWORD=123456
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  ichat:
+    image: jianboy/ichat:latest
+    depends_on:
+      - fastdfs
+      - mysql
+    restart: always
+    ports:
+      - 8080:8080
+      - 8088:8088
+
+  ichat-f:
+    image: jianboy/ichat-f:latest
+    build:
+      context: ./froent
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
