@@ -21,7 +21,7 @@ services:
     image: mysql:5.7.4
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=fastdfs
+      - MYSQL_DATABASE=ichat-dev
       - MYSQL_USER=fastdfs
       - MYSQL_PASSWORD=123456
     ports:
