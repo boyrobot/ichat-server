@@ -13,8 +13,6 @@ services:
       - ./deploy/fastdfs/conf/tracker.conf:/etc/fdfs/tracker.conf
       - ./deploy/fastdfs/conf/client.conf:/etc/fdfs/client.conf
       - ./deploy/fastdfs/conf/mod_fastdfs.conf:/etc/fdfs/mod_fastdfs.conf
-    networks:
-      - host
     privileged: true
     ports:
       - 22122:22122
@@ -30,7 +28,7 @@ services:
       - 3306:3306
     volumes:
       - ./mysql:/var/lib/mysql
-
+    
   ichat:
     image: jianboy/ichat:latest
     depends_on:
@@ -43,5 +41,7 @@ services:
 
   ichat-f:
     image: jianboy/ichat-f:latest
+    depends_on:
+      - ichat
     ports:
       - 80:80
